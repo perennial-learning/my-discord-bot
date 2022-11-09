@@ -16,9 +16,17 @@ const client = new Client({
 	],
 });
 
+function declareBirth(client){
+	client.guilds.cache.get("1039891023716950046").channels.cache.get("1039891023716950049").send("I'm alive! How may I be of assistance?");
+};
+
 // When the client is ready, run this code (only once)
 client.once(Events.ClientReady, (c) => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
+});
+
+client.on(Events.ClientReady, (c) => {
+	declareBirth(c);
 });
 
 // Log in to Discord with your client's token
@@ -42,6 +50,9 @@ client.on(Events.MessageCreate, (message) => {
 		help: () => {
 			message.reply(`Available commands: ${Object.keys(commands).join(", ")}`);
 		},
+		rules: () => {
+			message.reply(`There are no rules.`);
+		}
 	};
 
 	if (command in commands) {
